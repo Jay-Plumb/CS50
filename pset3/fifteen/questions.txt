@@ -1,0 +1,9 @@
+questions.txt
+
+Computer Science 50
+Problem Set 3
+
+0. The game supports 3 x 3 and 9 x 9 inclusive.
+1. A two dimensional array is used for the games board
+2. The function greet() is used to greet the user at the start of the game 
+3. The functions void init(void), void draw(void), bool move(int tile), and bool won(void) need to be implemented
