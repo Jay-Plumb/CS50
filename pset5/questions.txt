@@ -1,0 +1,50 @@
+0.  What is pneumonoultramicroscopicsilicovolcanoconiosis?
+    
+    pneumonoultramicroscopicsilicovolcanoconiosis is the longest word in the English dictionary. It is a npun and defined as a lung disease caused by silica dust.
+
+1.  According to its man page, what does getrusage do?
+    
+    getrusage returns resource usage 
+      
+
+2.  Per that same man page, how many members are in a variable of type struct rusage?
+    
+    There are 16 members in the type struct rusage
+    
+3.  Why do you think we pass before and after by reference (instead of by value) to calculate, even though we’re not changing their contents?
+    
+    It is faster to pass by reference compared to passing by value so we do not want the calling functions to add delay to our measurements.
+    
+4.  Explain as precisely as possible, in a paragraph or more, how main goes about reading words from a file. In other words, convince us that you indeed understand how that function’s for loop works.
+
+    Each character in the 'text' file (third command line argument) gets checked if it is an alphabetical character (or an apostrophe), and is stored in the word array internally. Digits contained in
+    the word are also ignored. After these filters, the timer starts and the word is checked to be a word or not (the timer is then stopped). The statistics such as mispelled word are updated and the 
+    process continues for the next word to be checked (if there is one).
+    
+5.  Why do you think we used fgetc to read each word’s characters one at a time rather than use fscanf with a format string like "%s" to read whole words at a time? Put another way, what problems might arise by relying on fscanf alone?
+    
+    The string that is being checked could be modified depending on how the format string has been defined and white-space is also ignored. This could be problematic so it is best to look at each character so we can correctly check the word.
+
+6.  Why do you think we declared the parameters for check and load as const?
+
+    The parameters are pointers so the values being pointed to are not modified. If they were not consts then it is not possible to point the word/dictionary to something else.
+    
+    
+7.  What data structure(s) did you use to implement your spell-checker? Be sure not to leave your answer at just "hash table," "trie," or the like. Expound on what’s inside each of your "nodes."
+
+    I used a hash table to implement the spell checker using separate chaining. Specifically, I used a link list and inserted each new word to the front of the list in the load function. 
+
+8. How slow was your code the first time you got it working correctly? 
+
+    Total time was 0.21 and the main bottleneck was in the check function. 
+
+9. What kinds of changes, if any, did you make to your code in order to improve its performance?
+    I noticed that the hash function was only generating 1999 buckets. I knew that I needed 143091 buckets to reach constant lookup time so I used a different
+    hash function which gave 13999 unique buckets. This did increase the load time but this reduced the overal time to 0.10. 
+    
+10. Do you feel that your code has any bottlenecks that you were not able to chip away at?
+
+    There was a trade off between time in load and time in check. Using a greater number of buckets seemed to increase the time in load but this reduced 
+    time in check because there were less nodes to traverse. 
+    
+    Unload was realtively long 0.05 but there didn't seem to be a way to reduce it without making valgrind unhappy
